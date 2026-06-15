@@ -2,7 +2,14 @@
 #include <stdexcept>
 #include <string>
 
-/* Program that can calculate complicated expressions using the console window */
+/* 
+   Program that can calculate complicated expressions using the console window 
+   My interest wasn't so much in the calculator from Stroustrup's PPP3 work,
+   but in the underlying principles of expression parsing using Tokens.
+
+   I have tried to do as much without reciting the book. Some problems were obvious,
+   for example: a buffer was needed to temporarily store a token so the next function could use it.
+*/
 
 // Simple error function rather than returning ambiguous error values
 void error(std::string message)
@@ -14,10 +21,12 @@ const char number = '8'; // kind for numbers
 const char quit = 'e'; // 'e' for "quit"
 const char print = '='; // '=' for "print"
 
+// Simple Token data structure
+// A Token contains a kind and value.
 struct Token
 {
-	char kind; // what kind of token
-	double value; // for numbers: a value
+	char kind;
+	double value;
 
 	Token(char k) : kind(k), value(0) {} 
 	Token(char k, double val) : kind(k), value(val) {}    // we still need a "kind" to represent a number
@@ -81,16 +90,16 @@ void Token_stream::putback(Token t)
 	{
 		error("Error: Buffer is full in putback()");   // Not ideal, but will do for now
 	}
-	buffer = t;   // put token into buffer
+	buffer = t;   // Put token into buffer
 	full = true;  // OK, buffer is now full
 }
 
-Token_stream ts; // provides get() and putback()
+Token_stream ts; // Provides get() and putback()
 
 double expression(); // declaration so that primary() can call expression()	
 
 // Deals with numbers and parentheses
-// Expressions genuinely start with a number or parentheses
+// Expressions normally start with a number or opening bracket
 double primary()
 {
 	Token t = ts.get();
@@ -129,7 +138,7 @@ double term()
 		switch (t.kind)
 		{
 		case '*':
-			val *= primary();
+			val *= primary();  // Term '*' Primary rule
 			break;
 
 		case '/':
@@ -139,12 +148,12 @@ double term()
 			{
 				error("Error: Division by zero inside term()");
 			}
-			val /= d;
+			val /= d;      // Term '/' Primary rule
 			break;
 		}
 
 		default:
-			ts.putback(t);
+			ts.putback(t);   // Put t back into the token stream
 			return val;
 		}
 	}
@@ -163,11 +172,11 @@ double expression()
 		switch (t.kind)
 		{
 		case '+':
-			val += term();
+			val += term();  // Expression '+' Term rule
 			break;
 
 		case '-':
-			val -= term();
+			val -= term(); // Expression '-' Term rule
 			break;
 
 		default:
@@ -177,6 +186,8 @@ double expression()
 	}
 }
 
+// Deals with printing the result
+// The program terminates when an error occurs (i'll get round to this matter!)
 int main()
 try
 {
