@@ -1,4 +1,19 @@
 #include <iostream>
+#include <vector>
+
+
+/* Program that can calculate complicated expressions using the console window */
+
+struct Token
+{
+	char kind; // what kind of token
+	double value; // for numbers: a value
+
+	Token(char k) : kind(k), value(0) {} 
+	Token(char k, double val) : kind(k), value(val) {}    // we'll use '8' to represent a number
+};
+
+std::vector<Token> tokens; // store tokens here
 
 int main()
 {
