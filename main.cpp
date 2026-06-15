@@ -1,6 +1,14 @@
 #include <iostream>
+#include <stdexcept>
+#include <string>
 
 /* Program that can calculate complicated expressions using the console window */
+
+// Simple error function rather than returning ambiguous error values
+void error(std::string message)
+{
+	throw std::runtime_error(message);
+}
 
 const char number = '8'; // kind for numbers
 const char quit = 'e'; // 'e' for "quit"
@@ -62,16 +70,16 @@ Token Token_stream::get()
 	}
 
 	default:
-		std::cerr << "Error: Invalid token!\n";
-		return Token('?');
+		error("Error: Bad token in get()");
 	}
 }
 
+// Puts a Token back into the buffer if not full
 void Token_stream::putback(Token t)
 {
 	if (full)
 	{
-		std::cerr << "Error: Buffer is full!\n";
+		error("Error: Buffer is full in putback()");   // Not ideal, but will do for now
 	}
 	buffer = t;   // put token into buffer
 	full = true;  // OK, buffer is now full
@@ -81,6 +89,8 @@ Token_stream ts; // provides get() and putback()
 
 double expression(); // declaration so that primary() can call expression()	
 
+// Deals with numbers and parentheses
+// Expressions genuinely start with a number or parentheses
 double primary()
 {
 	Token t = ts.get();
@@ -93,8 +103,7 @@ double primary()
 			t = ts.get();
 			if (t.kind != ')')
 			{
-				std::cerr << "Error: Expected ')'!" << '\n';
-				return -1; // return an error value for now
+				error("Error: Expected ')' inside primary()");
 			}
 			return val;
 		}
@@ -103,11 +112,12 @@ double primary()
 			return t.value;
 
 		default:
-			std::cerr << "Error: Expected a primary!" << '\n';
-			return -1; // return an error value for now
+			error("Error: Expected a primary inside primary()");
 	}
 }
 
+// Deals with multiplication and division
+// Checks for division by zero
 double term()
 {
 	double val = primary();
@@ -127,8 +137,7 @@ double term()
 			double d = primary();
 			if (d == 0)
 			{
-				std::cerr << "Error: Division by zero!" << '\n';
-				return -1; // return an error value for now
+				error("Error: Division by zero inside term()");
 			}
 			val /= d;
 			break;
@@ -139,9 +148,10 @@ double term()
 			return val;
 		}
 	}
-	
 }
 
+// Deals with addition and subtraction
+// Calls term() to handle multiplication and division first
 double expression()
 {
 	double val = term();
@@ -168,6 +178,7 @@ double expression()
 }
 
 int main()
+try
 {
 	while (std::cin)
 	{
@@ -184,8 +195,12 @@ int main()
 		}
 		else
 		{
-			std::cerr << "Error: Expected '=' or 'e'!" << '\n';
-			return -1; // return an error value for now
+			error("Error: Expected '=' or 'e' inside main()");
 		}
 	}
+}
+catch (const std::exception& e)
+{
+	std::cerr << e.what() << '\n';
+	return -1;
 }
