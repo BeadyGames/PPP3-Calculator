@@ -52,3 +52,27 @@ void Token_stream::putback(Token t)
 	buffer = t;   // Put token into buffer
 	full = true;  // OK, buffer is now full
 }
+
+// Cleans up Token stream after an error has occured
+void Token_stream::ignore(char c)
+{
+	// First check the token buffer
+	if (full && buffer.kind == c)
+	{
+		full = false;
+		return;
+	}
+
+	// Throw away anything currently in the buffer
+	full = false;
+
+	// Then read from input until we find c
+	char ch = 0;
+	while (std::cin >> ch)    // read what was left in input stream when error occured
+	{
+		if (ch == c)    // found a '='? 
+		{
+			return;    // cool, stream is clear, let's get outta here!
+		}
+	}
+}

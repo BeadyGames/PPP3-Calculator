@@ -21,6 +21,7 @@ class Token_stream
 public:
 	Token get();
 	void putback(Token t);
+	void ignore(char c);
 
 private:
 	Token buffer{ 0 };

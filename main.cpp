@@ -17,32 +17,34 @@
 // Deals with printing the result
 // The program terminates when an error occurs (i'll get round to this matter!)
 int main()
-try
 {
+	Token_stream ts;
+
 	while (std::cin)
 	{
-
-		Token_stream ts;
-
-		double val = expression(ts);
-
-		Token t = ts.get();
-		if (t.kind == print)
+		try
 		{
-			std::cout << "Result: " << val << '\n';
-		}
-		else if (t.kind == quit)
+			double val = expression(ts);
+
+			Token t = ts.get();
+			if (t.kind == print)
+			{
+				std::cout << "Result: " << val << '\n';
+			}
+			else if (t.kind == quit)
+			{
+				break;
+			}
+			else
+			{
+				error("Error: Expected '=' or 'e' inside main()");
+			}
+		}	
+
+		catch (const std::exception& e)
 		{
-			break;
-		}
-		else
-		{
-			error("Error: Expected '=' or 'e' inside main()");
+			std::cerr << e.what() << '\n';
+			ts.ignore(print);
 		}
 	}
-}
-catch (const std::exception& e)
-{
-	std::cerr << e.what() << '\n';
-	return -1;
 }
