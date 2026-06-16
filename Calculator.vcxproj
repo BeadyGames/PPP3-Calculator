@@ -139,7 +139,15 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="calculator.cpp" />
+    <ClCompile Include="log.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="token.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="calculator.h" />
+    <ClInclude Include="log.h" />
+    <ClInclude Include="token.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
