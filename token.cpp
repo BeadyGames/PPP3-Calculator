@@ -38,7 +38,7 @@ Token Token_stream::get()
 
 	default:
 		error("Error: Bad token in get()");
-		return -1;
+		return -1; // to avoid compiler warning about no return
 	}
 }
 

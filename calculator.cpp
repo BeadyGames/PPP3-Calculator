@@ -14,7 +14,8 @@
 		 Term / Primary
 * Primary:
 		 Number
-		 ( Expression )
+		-( Expression )
+		+( Expression )
 		 - Primary
 		 + Primary
 */
@@ -99,6 +100,12 @@ double primary(Token_stream& ts)
 		}
 		return val;
 	}
+
+	case '-':
+		return -primary(ts);   // Allows for negative numbers
+
+	case '+':
+		return primary(ts);   // Just in case a '+' is used to start an expression
 
 	case number:
 		return t.value;

@@ -5,17 +5,17 @@ const char quit = 'e'; // 'e' for "quit"
 const char print = '='; // '=' for "print"
 
 // Simple Token data structure
-// A Token contains a kind and value.
 struct Token
 {
 	char kind;
 	double value;
 
-	Token(char k) : kind(k), value(0) {}
-	Token(char k, double val) : kind(k), value(val) {}    // we still need a "kind" to represent a number
+	Token(char k) : kind(k), value(0) {}    // Token that represents operators and parentheses
+	Token(char k, double val) : kind(k), value(val) {}   // Token that represents numbers
 };
 
 // Manage the input stream and provide tokens
+// Contains putback() to put a token back into the stream
 class Token_stream
 {
 public:
