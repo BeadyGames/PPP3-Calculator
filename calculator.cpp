@@ -68,10 +68,26 @@ double term(Token_stream& ts)
 		{
 			double d = primary(ts);
 			if (d == 0)
-			{
 				error("Error: Division by zero inside term()");
-			}
+
 			val /= d;      // Term '/' Primary rule
+			break;
+		}
+
+		case '!':
+		{
+			if (val == 0)
+			{
+				val = 1; // Factorial of 0 is 1
+			}
+			else
+			{
+				for (int n = val; n > 1; --n)
+				{
+					val *= n - 1;
+				}
+			}
+
 			break;
 		}
 

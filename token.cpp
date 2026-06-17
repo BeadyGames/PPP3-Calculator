@@ -23,6 +23,7 @@ Token Token_stream::get()
 	case '/':
 	case '(':
 	case ')':
+	case '!':
 	case print:
 	case quit:
 		return Token(ch);
@@ -47,7 +48,7 @@ void Token_stream::putback(Token t)
 {
 	if (full)
 	{
-		error("Error: Buffer is full in putback()");   // Not ideal, but will do for now
+		error("Error: Buffer is full in putback()");
 	}
 	buffer = t;   // Put token into buffer
 	full = true;  // OK, buffer is now full
