@@ -43,12 +43,11 @@ log.h             Error helper declaration
 
 ## Building
 
-```text
-## Visual Studio
+**Visual Studio 2026**
 
 Open Calculator.slnx or Calculator.vcxproj in Visual Studio 2026 and build the project.
 
-## Command Line
+**Command Line**
 
 If using a compiler such as `g++`
 
@@ -56,7 +55,6 @@ If using a compiler such as `g++`
 
 Then run,
 
-`./calculator` or `calculator.exe` (Depending on OS)
-```
+`./calculator` (Linux) or `calculator.exe` (Windows)
 
 
