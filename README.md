@@ -1,19 +1,60 @@
 # PPP3 Calculator
 
-The Calculator program which Bjarne Stroustrup works through in Chapter 5; although, this is my attempt 
-to see how far I could get without consulting the chapter for help.
+A console-based expression calculator written in C++ as a parser/tokenization exercise inspired by Chapter 5 of *Programming: Principles and Practice Using C++* by Bjarne Stroustrup.
 
-## Snags
+The project implements a small recursive descent parser that evaluates arithmetic expressions using tokens, operator precedence, parentheses, unary operators, and basic error recovery.
 
-I have tried to see if I could create a vector to store operators - so when a user enters a `*` within a calculation, we can "look ahead" in order to evaluate expressions based on Mathematical laws. This becomes messy quite quickly. I can't see a way around the problem of finding a `*` or a `/` and evaluating the expression in Mathematical order other than Tokenizing and creating different functions to deal with order of operations.
+## Features
 
-## Mathematical Laws
+- Addition, subtraction, multiplication, and division
+- Parentheses for grouping expressions
+- Operator precedence handling
+- Input recovery after invalid expressions
 
-- Number: Every number is a Term and Expression
-- Term: Number OR Term `*` Number OR Term `/` Number
-- Expression: Term OR Expression `+` Term OR Expression `-` Term
+## Example Usage
 
-## Example
+```text
+2 + 3 =
+Result: 5
 
-2 is a number. As 2 is a number, it's also a Term. As 2 is a Term, it's also an Expression. Is it followed by a `+` or `-`?
-  
+2 + 3 * 4 =
+Result: 14
+
+(2 + 3) * 4 =
+Result: 20
+
+-5 + 2 =
+Result: -3
+
+q
+```
+
+## Project Structure
+
+```text
+main.cpp          Program entry point
+calculator.cpp    Parser and calculation loop
+calculator.h      Parser function declarations
+token.cpp         Token stream implementation
+token.h           Token and Token_stream definitions
+log.cpp           Error helper
+log.h             Error helper declaration
+```
+
+## Building
+
+**Visual Studio 2026**
+
+Open `Calculator.slnx` or `Calculator.vcxproj` in Visual Studio 2026 and build the project.
+
+**Command Line**
+
+If using a compiler such as `g++`
+
+`g++ -std=c++20 -Wall -Wextra -pedantic main.cpp calculator.cpp token.cpp log.cpp -o calculator`
+
+Then run,
+
+`./calculator` (Linux) or `calculator.exe` (Windows)
+
+
