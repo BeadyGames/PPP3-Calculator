@@ -26,20 +26,22 @@ Result: 20
 -5 + 2 =
 Result: -3
 
-q
+q ```
 
 ## Project Structure
 
+```text
 main.cpp          Program entry point
 calculator.cpp    Parser and calculation loop
 calculator.h      Parser function declarations
 token.cpp         Token stream implementation
 token.h           Token and Token_stream definitions
 log.cpp           Error helper
-log.h             Error helper declaration
+log.h             Error helper declaration ```
 
-# Building
+## Building
 
+```text
 ## Visual Studio
 
 Open Calculator.slnx or Calculator.vcxproj in Visual Studio 2026 and build the project.
@@ -52,6 +54,6 @@ If using a compiler such as `g++`
 
 Then run,
 
-`./calculator` or `calculator.exe` (Depending on OS)
+`./calculator` or `calculator.exe` (Depending on OS) ```
 
 
