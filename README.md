@@ -1,13 +1,57 @@
 # PPP3 Calculator
 
-The Calculator program which Bjarne Stroustrup works through in Chapter 5; although, this is my attempt 
-to see how far I could get without consulting the chapter for help. I have thoroughly enjoyed building this up from scratch
-and it has been a very useful exercise.
+A console-based expression calculator written in C++ as a parser/tokenization exercise inspired by Chapter 5 of *Programming: Principles and Practice Using C++* by Bjarne Stroustrup.
 
-## Snags
+The project implements a small recursive descent parser that evaluates arithmetic expressions using tokens, operator precedence, parentheses, unary operators, and basic error recovery.
 
-I have tried to see if I could create a vector to store operators - so when a user enters a `*` within a calculation, we can "look ahead" in order to evaluate expressions based on Mathematical laws. This becomes messy quite quickly. I can't see a way around the problem of finding a `*` or a `/` and evaluating the expression in Mathematical order other than writing a parser according to Mathematical laws and using tokens.
+## Features
 
-Using our `ignore()` function inside Token_stream, we initially looked for a `=` at the end of input to clear the `istream`. This idea worked until
-I started given the program 'strange' input such as "This program is rubbish" or `2 * 3 + +`. The most effective solution was to use cin.clear() and cin.ignore().
-  
+- Addition, subtraction, multiplication, and division
+- Parentheses for grouping expressions
+- Operator precedence handling
+- Input recovery after invalid expressions
+
+## Example Usage
+
+```text
+2 + 3 =
+Result: 5
+
+2 + 3 * 4 =
+Result: 14
+
+(2 + 3) * 4 =
+Result: 20
+
+-5 + 2 =
+Result: -3
+
+q
+
+## Project Structure
+
+main.cpp          Program entry point
+calculator.cpp    Parser and calculation loop
+calculator.h      Parser function declarations
+token.cpp         Token stream implementation
+token.h           Token and Token_stream definitions
+log.cpp           Error helper
+log.h             Error helper declaration
+
+# Building
+
+## Visual Studio
+
+Open Calculator.slnx or Calculator.vcxproj in Visual Studio 2026 and build the project.
+
+## Command Line
+
+If using a compiler such as `g++`
+
+`g++ -std=c++20 -Wall -Wextra -pedantic main.cpp calculator.cpp token.cpp log.cpp -o calculator`
+
+Then run,
+
+`./calculator` or `calculator.exe` (Depending on OS)
+
+
