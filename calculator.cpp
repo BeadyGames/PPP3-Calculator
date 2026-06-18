@@ -23,7 +23,7 @@
 
 
 // Deals with addition and subtraction
-// Calls term() to handle multiplication and division first
+// Puts Token back into stream if not recognised here
 double expression(Token_stream& ts)
 {
 	double val = term(ts);
@@ -51,6 +51,7 @@ double expression(Token_stream& ts)
 
 // Deals with multiplication and division
 // Checks for division by zero
+// Puts Token back into stream if not recognised here
 double term(Token_stream& ts)
 {
 	double val = primary(ts);
@@ -99,7 +100,7 @@ double term(Token_stream& ts)
 	}
 }
 
-// Deals with numbers and parentheses
+// Deals with positive and negative numbers and parentheses
 // Expressions normally start with a number or opening bracket
 double primary(Token_stream& ts)
 {
