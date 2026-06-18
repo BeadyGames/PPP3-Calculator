@@ -45,7 +45,7 @@ log.h             Error helper declaration
 
 **Visual Studio 2026**
 
-Open Calculator.slnx or Calculator.vcxproj in Visual Studio 2026 and build the project.
+Open `Calculator.slnx` or `Calculator.vcxproj` in Visual Studio 2026 and build the project.
 
 **Command Line**
 
