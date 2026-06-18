@@ -1,3 +1,4 @@
+#include <iostream>
 #include "calculator.h"
 #include "token.h"
 #include "log.h"
@@ -128,5 +129,38 @@ double primary(Token_stream& ts)
 
 	default:
 		error("Error: Expected a primary inside primary()");
+	}
+}
+
+void calculate()
+{
+	Token_stream ts;
+
+	while (std::cin)
+	{
+		try
+		{
+			double val = expression(ts);
+
+			Token t = ts.get();
+			if (t.kind == print)
+			{
+				std::cout << "Result: " << val << '\n';
+			}
+			else if (t.kind == quit)
+			{
+				break;
+			}
+			else
+			{
+				error("Error: Expected '=' or 'e' inside main()");
+			}
+		}
+
+		catch (const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+			ts.ignore(print);
+		}
 	}
 }

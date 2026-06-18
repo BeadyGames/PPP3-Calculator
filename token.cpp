@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "token.h"
 #include "log.h"
 
@@ -67,13 +68,7 @@ void Token_stream::ignore(char c)
 	// Throw away anything currently in the buffer
 	full = false;
 
-	// Then read from input until we find c
-	char ch = 0;
-	while (std::cin >> ch)    // read what was left in input stream when error occured
-	{
-		if (ch == c)    // found a '='? 
-		{
-			return;    // cool, stream is clear, let's get outta here!
-		}
-	}
+	// Clear the input stream
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

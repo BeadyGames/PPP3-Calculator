@@ -1,7 +1,5 @@
-#include <iostream>
-#include "token.h"
 #include "calculator.h"
-#include "log.h"
+
 
 /* 
    Program that can calculate complicated expressions using the console window 
@@ -18,33 +16,5 @@
 // The program terminates when an error occurs (i'll get round to this matter!)
 int main()
 {
-	Token_stream ts;
-
-	while (std::cin)
-	{
-		try
-		{
-			double val = expression(ts);
-
-			Token t = ts.get();
-			if (t.kind == print)
-			{
-				std::cout << "Result: " << val << '\n';
-			}
-			else if (t.kind == quit)
-			{
-				break;
-			}
-			else
-			{
-				error("Error: Expected '=' or 'e' inside main()");
-			}
-		}	
-
-		catch (const std::exception& e)
-		{
-			std::cerr << e.what() << '\n';
-			ts.ignore(print);
-		}
-	}
+	calculate();
 }
