@@ -3,5 +3,5 @@
 
 void error(const char* message)
 {
-	throw std::exception(message);
+	throw std::runtime_error(message);
 }
