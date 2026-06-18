@@ -1,8 +1,8 @@
 #pragma once
 
-const char number = '8'; // kind for numbers
-const char quit = 'e'; // 'e' for "quit"
-const char print = '='; // '=' for "print"
+const char number = '8';
+const char quit = 'q'; 
+const char print = '=';
 
 // Simple Token data structure
 struct Token
@@ -16,6 +16,7 @@ struct Token
 
 // Manage the input stream and provide tokens
 // Contains putback() to put a token back into the stream
+// Contains ignore() to clear Token and std input streams
 class Token_stream
 {
 public:

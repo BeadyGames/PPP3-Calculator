@@ -12,8 +12,8 @@
    Extra features have also been added which are not in the chapter work itself.
 */
 
-// Deals with printing the result
-// The program terminates when an error occurs (i'll get round to this matter!)
+
+// Simply calls calculate() to start the program
 int main()
 {
 	calculate();

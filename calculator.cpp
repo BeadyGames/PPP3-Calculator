@@ -132,6 +132,9 @@ double primary(Token_stream& ts)
 	}
 }
 
+// The main loop
+// Prints result or quits porgram
+// Errors are caught and dealt with here using ignore()
 void calculate()
 {
 	Token_stream ts;

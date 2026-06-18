@@ -9,7 +9,7 @@ Token Token_stream::get()
 	// Is there a Token in the buffer?
 	if (full)
 	{
-		full = false;    // empty the buffer
+		full = false; 
 		return buffer;
 	}
 
@@ -51,11 +51,11 @@ void Token_stream::putback(Token t)
 	{
 		error("Error: Buffer is full in putback()");
 	}
-	buffer = t;   // Put token into buffer
-	full = true;  // OK, buffer is now full
+	buffer = t;  
+	full = true;  
 }
 
-// Cleans up Token stream after an error has occured
+// Cleans up Token and input streams after an error has occured
 void Token_stream::ignore(char c)
 {
 	// First check the token buffer
@@ -65,7 +65,7 @@ void Token_stream::ignore(char c)
 		return;
 	}
 
-	// Throw away anything currently in the buffer
+	// Clear the Token stream
 	full = false;
 
 	// Clear the input stream
